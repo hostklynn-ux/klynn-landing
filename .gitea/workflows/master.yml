@@ -1,0 +1,255 @@
+name: "Master Branch Workflow"
+
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize, reopened, review_requested, closed]
+  push:
+    branches: [master]
+    tags: ["v*"]
+
+env:
+  GITEA_URL: https://git.getklynn.com
+  REPO: Klynn/Frontend
+
+jobs:
+  # -----------------------------------------------------
+  # JOB 1: BUILD & TEST (para PR y push a master)
+  # -----------------------------------------------------
+  build-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'pull_request' ||
+      github.event_name == 'push'
+    env:
+      NODE_ENV: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm type-check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Build
+        run: pnpm build
+
+  # -----------------------------------------------------
+  # JOB 2: VALIDAR PULL REQUESTS HACIA MAIN
+  # -----------------------------------------------------
+  validate_pr:
+    name: Validate Pull Request to Master
+    runs-on: ubuntu-latest
+    needs: [build-test]
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.action != 'closed' &&
+      needs.build-test.result == 'success'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log PR context
+        run: |
+          echo "==== PR CONTEXT ===="
+          echo "event:        ${{ github.event_name }}"
+          echo "action:       ${{ github.event.action }}"
+          echo "author:       ${{ github.event.pull_request.user.login }}"
+          echo "source:       ${{ github.event.pull_request.head.ref }}"
+          echo "target:       ${{ github.event.pull_request.base.ref }}"
+          echo "reviewers:    ${{ toJSON(github.event.pull_request.requested_reviewers) }}"
+          echo "===================="
+
+      - name: Validate PR Rules
+        env:
+          SOURCE: ${{ github.event.pull_request.head.ref }}
+          TARGET: ${{ github.event.pull_request.base.ref }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          REVIEWERS_JSON: ${{ toJSON(github.event.pull_request.requested_reviewers) }}
+        run: |
+          set -euo pipefail
+          echo "## 🔍 VALIDATING PR → master"
+          IS_VALID=true
+          REVIEWERS_COUNT=$(echo "$REVIEWERS_JSON" | jq '. | length' 2>/dev/null || echo "0")
+
+          if [ "$REVIEWERS_COUNT" -eq 0 ]; then
+            IS_VALID=false
+            echo "❌ No reviewers assigned."
+          else
+            echo "✅ Reviewers assigned ($REVIEWERS_COUNT)."
+          fi
+
+          if echo "$REVIEWERS_JSON" | jq -r '.[].login' | grep -q "^${AUTHOR}$"; then
+            IS_VALID=false
+            echo "❌ Author ($AUTHOR) is also a reviewer."
+          fi
+
+          if [ "$SOURCE" = "develop" ] || echo "$SOURCE" | grep -Eq '^hotfix/'; then
+            echo "✅ Allowed source branch: $SOURCE → master"
+          else
+            IS_VALID=false
+            echo "❌ Invalid source branch: $SOURCE"
+          fi
+
+          if [ "$IS_VALID" = "false" ]; then
+            echo "❌ Validation failed"
+            exit 1
+          fi
+          echo "✅ PR validation passed"
+
+  # -----------------------------------------------------
+  # JOB 2: AUTO RELEASE (solo después de merge a master)
+  # -----------------------------------------------------
+  auto-release:
+    name: Auto Release (SemVer)
+    runs-on: ubuntu-latest
+    needs: [build-test]
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'master' &&
+      needs.build-test.result == 'success'
+    outputs:
+      new_tag: ${{ steps.semver.outputs.new_tag }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.ACTIONS_TOKEN }}
+
+      - name: Determine new version (SemVer)
+        id: semver
+        run: |
+          VERSION=$(git tag --sort=-creatordate | head -n 1)
+          VERSION=${VERSION:-v0.0.0}
+          IFS='.' read -r major minor patch <<<"${VERSION#v}"
+          patch=$((patch+1))
+          NEW_TAG="v$major.$minor.$patch"
+          echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
+          echo "📦 Next version: $NEW_TAG"
+
+      - name: Generate detailed changelog
+        run: |
+          echo "## 🚀 Release Notes for ${{ steps.semver.outputs.new_tag }}" > changelog.md
+          echo "### 🧑‍💻 Author: ${{ github.event.pull_request.user.login }}" >> changelog.md
+          echo "### 📅 Date: $(date '+%Y-%m-%d %H:%M:%S')" >> changelog.md
+          echo "" >> changelog.md
+          git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"- %s (%an)" >> changelog.md
+          echo "" >> changelog.md
+          echo "### 🔗 Source Branch: ${{ github.event.pull_request.head.ref }}" >> changelog.md
+          echo "### 🎯 Target Branch: ${{ github.event.pull_request.base.ref }}" >> changelog.md
+          cat changelog.md
+
+      - name: Tag & push version
+        run: |
+          git config user.name "Gitea Actions"
+          git config user.email "actions@gitea.local"
+          git tag ${{ steps.semver.outputs.new_tag }}
+          git push origin ${{ steps.semver.outputs.new_tag }}
+
+      - name: Create release in Gitea (via API)
+        env:
+          TOKEN: ${{ secrets.ACTIONS_TOKEN }}
+        run: |
+          echo "🚀 Creating release ${{ steps.semver.outputs.new_tag }} in Gitea..."
+          curl -s -X POST "${GITEA_URL}/api/v1/repos/${REPO}/releases?access_token=${TOKEN}" \
+            -H "accept: application/json" \
+            -H "Content-Type: application/json" \
+            -d "$(jq -n \
+              --arg tag "${{ steps.semver.outputs.new_tag }}" \
+              --arg name "${{ steps.semver.outputs.new_tag }}" \
+              --arg body "$(cat changelog.md)" \
+              '{tag_name: $tag, name: $name, body: $body}')"
+
+  # -----------------------------------------------------
+  # JOB 3: BACKMERGE MAIN → DEVELOP
+  # -----------------------------------------------------
+  backmerge-develop:
+    name: Backmerge master → develop
+    runs-on: ubuntu-latest
+    needs: [build-test, auto-release]
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'master' &&
+      needs.build-test.result == 'success' &&
+      needs.auto-release.result == 'success'
+    env:
+      GITEA_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
+      REPO: Klynn/Frontend
+      GITEA_URL: https://git.getklynn.com
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+          token: ${{ env.GITEA_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "Gitea Actions"
+          git config user.email "actions@gitea.local"
+
+      - name: Fetch develop
+        run: git fetch origin develop
+
+      - name: Checkout or create develop branch
+        run: |
+          if git rev-parse --verify develop >/dev/null 2>&1; then
+            git checkout develop
+          else
+            git checkout -b develop origin/develop
+          fi
+
+      - name: Merge master → develop
+        run: |
+          git merge origin/master --no-edit || echo "⚠️ Merge con conflictos, resolver manualmente"
+
+      - name: Push backmerge
+        run: |
+          git remote set-url origin "https://${GITEA_TOKEN}@git.getklynn.com/${REPO}.git"
+          if git push origin develop; then
+            echo "✅ Backmerge master → develop completado y enviado a remoto."
+          else
+            echo "🚫 Push rechazado por branch protection. Revisa Gitea → Settings → Branches → develop"
+          fi
+  # -----------------------------------------------------
+  # JOB 4: GENERAR RELEASE NOTES (VISUAL)
+  # -----------------------------------------------------
+  generate-release-notes:
+    name: Generate Release Notes
+    runs-on: ubuntu-latest
+    needs: [build-test, auto-release]
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.merged == true &&
+      needs.build-test.result == 'success' &&
+      needs.auto-release.result == 'success'
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate notes
+        run: |
+          echo "## Release Notes for ${{ needs.auto-release.outputs.new_tag }}" > notes.md
+          git log -n 10 --oneline >> notes.md
+          cat notes.md

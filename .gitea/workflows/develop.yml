@@ -1,0 +1,103 @@
+name: "Develop Branch PR Validation"
+
+on:
+  pull_request:
+    branches: [develop]
+    types: [opened, synchronize, reopened, review_requested]
+
+jobs:
+  validate:
+    name: Validate Pull Request (Develop)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log PR context
+        run: |
+          echo
+          echo "==== DEVELOP PR CONTEXT ===="
+          echo "Event:    ${{ gitea.event_name }}"
+          echo "Action:   ${{ gitea.event.action }}"
+          echo "Author:   ${{ gitea.event.pull_request.user.login }}"
+          echo "Source:   ${{ gitea.event.pull_request.head.ref }}"
+          echo "Target:   ${{ gitea.event.pull_request.base.ref }}"
+          echo "Reviewers:${{ toJSON(gitea.event.pull_request.requested_reviewers) }}"
+          echo "Additions:${{ gitea.event.pull_request.additions }}"
+          echo "Deletions:${{ gitea.event.pull_request.deletions }}"
+          echo "============================"
+          echo
+
+      - name: Validate PR rules (detailed)
+        env:
+          AUTHOR: ${{ gitea.event.pull_request.user.login }}
+          REVIEWERS_JSON: ${{ toJSON(gitea.event.pull_request.requested_reviewers) }}
+          SOURCE: ${{ gitea.event.pull_request.head.ref }}
+          TARGET: ${{ gitea.event.pull_request.base.ref }}
+        run: |
+          set -euo pipefail
+          echo "## 🔍 VALIDATING PR RULES (develop)"
+          echo "source=$SOURCE target=$TARGET author=$AUTHOR"
+          echo "reviewers_json=$REVIEWERS_JSON"
+          IS_VALID=true
+
+          REV_COUNT=$(echo "$REVIEWERS_JSON" | jq '. | length' 2>/dev/null || echo "0")
+          if [ "$REV_COUNT" -eq 0 ]; then
+            IS_VALID=false
+            echo "❌ No reviewers assigned (count: $REV_COUNT)"
+          else
+            echo "✅ Reviewers assigned (count: $REV_COUNT)"
+          fi
+
+          if echo "$REVIEWERS_JSON" | jq -r '.[].login' 2>/dev/null | grep -q "^${AUTHOR}$"; then
+            IS_VALID=false
+            echo "❌ Author is a reviewer (not allowed)"
+          else
+            echo "✅ Author not in reviewers"
+          fi
+
+          if echo "$SOURCE" | grep -Eq '^(feature|bugfix|hotfix|issue|refactor)/'; then
+            echo "✅ Source branch naming OK: $SOURCE"
+          elif [ "$SOURCE" = "develop" ]; then
+            echo "✅ Source is develop"
+          else
+            IS_VALID=false
+            echo "❌ Invalid source branch name: $SOURCE"
+          fi
+
+          if echo "$SOURCE" | grep -Eq '^(feature|bugfix|issue|refactor)/' && [ "$TARGET" != "develop" ]; then
+            IS_VALID=false
+            echo "❌ Feature/bugfix/issue/refactor MUST target develop (current: $TARGET)"
+          fi
+
+          if echo "$SOURCE" | grep -Eq '^hotfix/' && [ "$TARGET" != "master" ]; then
+            IS_VALID=false
+            echo "❌ Hotfix MUST target master (current: $TARGET)"
+          fi
+
+          echo "--------------------------------"
+          if [ "$IS_VALID" = "false" ]; then
+            echo "❌ Validation failed"
+            exit 1
+          fi
+          echo "✅ All PR rules passed"
+
+      - name: Check PR size
+        run: |
+          echo "## 📊 Checking PR size"
+          ADDITIONS=${{ gitea.event.pull_request.additions }}
+          DELETIONS=${{ gitea.event.pull_request.deletions }}
+          TOTAL=$((ADDITIONS + DELETIONS))
+          echo "Total changes: $TOTAL"
+          if [ "$TOTAL" -gt 400 ]; then
+            echo "⚠️ Large PR ($TOTAL) — consider splitting"
+          else
+            echo "✅ PR size acceptable"
+          fi
+
+      - name: Summary log
+        run: |
+          echo
+          echo "==== VALIDATION COMPLETED ===="
+          echo "All checks passed for this PR (develop)."
+          echo
