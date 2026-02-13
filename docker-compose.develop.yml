@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: .
+      target: production
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+        NEXT_PUBLIC_APP_NAME: ${NEXT_PUBLIC_APP_NAME}
+        NEXT_PUBLIC_APP_VERSION: ${NEXT_PUBLIC_APP_VERSION}
+    container_name: klynn-landing-dev
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
+      
+      # Router HTTP -> HTTPS Redirect
+      - "traefik.http.routers.klynn-landing-dev-http.rule=Host(`dev.landing.getklynn.com`)"
+      - "traefik.http.routers.klynn-landing-dev-http.entrypoints=web"
+      - "traefik.http.routers.klynn-landing-dev-http.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+
+      # Router HTTPS
+      - "traefik.http.routers.klynn-landing-dev.rule=Host(`dev.landing.getklynn.com`)"
+      - "traefik.http.routers.klynn-landing-dev.entrypoints=websecure"
+      - "traefik.http.routers.klynn-landing-dev.tls.certresolver=letsencrypt"
+      
+      # Middlewares: SEO headers (Anti-indexación)
+      - "traefik.http.middlewares.landing-no-index.headers.customresponseheaders.X-Robots-Tag=noindex, nofollow, noarchive"
+      - "traefik.http.routers.klynn-landing-dev.middlewares=landing-no-index"
+      
+      # Service definition
+      - "traefik.http.routers.klynn-landing-dev.service=klynn-landing-dev"
+      - "traefik.http.services.klynn-landing-dev.loadbalancer.server.port=3000"
+
+networks:
+  dokploy-network:
+    external: true

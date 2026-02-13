@@ -1,0 +1,36 @@
+# Dependencies
+node_modules
+
+# Build outputs
+.next
+out
+dist
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Development
+.prettierrc
+.eslintrc.json
+
+# Git
+.git
+.gitignore
+.gitea
+
+# Logs
+*.log
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+docs

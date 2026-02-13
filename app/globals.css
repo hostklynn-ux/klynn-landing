@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 160 20% 97%;
+    --foreground: 170 52% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 170 52% 12%;
+
+    --primary: 163 86% 63%;
+    --primary-foreground: 178 44% 15%;
+
+    --secondary: 178 44% 37%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 178 20% 96%;
+    --muted-foreground: 170 15% 40%;
+
+    --accent: 163 86% 63%;
+    --accent-foreground: 170 52% 12%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 160 15% 88%;
+    --input: 160 15% 88%;
+    --ring: 178 35% 48%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+  }
+
+  .dark {
+    --background: 170 52% 6%;
+    --foreground: 160 20% 97%;
+
+    --card: 170 40% 10%;
+    --card-foreground: 160 20% 97%;
+
+    --primary: 178 35% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 160 60% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 170 30% 15%;
+    --muted-foreground: 160 15% 60%;
+
+    --accent: 156 85% 50%;
+    --accent-foreground: 170 52% 12%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 170 30% 18%;
+    --input: 170 30% 18%;
+    --ring: 178 35% 48%;
+
+    --sidebar-background: 240 5.9% 10%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent;
+  }
+}
