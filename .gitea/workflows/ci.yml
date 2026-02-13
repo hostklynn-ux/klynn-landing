@@ -2,9 +2,9 @@ name: "CI - Build & Test"
 
 on:
   push:
-    branches: [develop, master]
+    branches: [master]
   pull_request:
-    branches: [develop, master]
+    branches: [master]
 
 env:
   GITEA_URL: https://git.getklynn.com
