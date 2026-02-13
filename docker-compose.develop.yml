@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  frontend:
+  landing:
     build:
       context: .
       target: production
@@ -12,12 +12,32 @@ services:
     container_name: klynn-landing-dev
     restart: unless-stopped
     env_file:
-      - .env
+      - .env.development
     networks:
       - dokploy-network
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=dokploy-network"
+      
+      # ==========================================
+      # MIDDLEWARES GLOBALES DE SEGURIDAD
+      # ==========================================
+      
+      # 1. Headers de Seguridad (Anti-Indexación)
+      - "traefik.http.middlewares.landing-sec-headers.headers.customresponseheaders.X-Robots-Tag=noindex, nofollow, noarchive"
+      - "traefik.http.middlewares.landing-sec-headers.headers.customresponseheaders.X-Content-Type-Options=nosniff"
+      
+      # 2. Autenticación Básica (Acceso restringido para desarrolladores)
+      # User: dev / Pass: klynn_secure_dev_2026
+      # Nota: $ signs are escaped as $$ for docker-compose interpolation
+      - "traefik.http.middlewares.landing-basic-auth.basicauth.users=dev:$$apr1$$KJO0w4xV$$81DBVZftKwP1tEaomh.1I0"
+      
+      # 3. Chain de middlewares (Auth + Headers de seguridad)
+      - "traefik.http.middlewares.landing-dev-chain.chain.middlewares=landing-basic-auth,landing-sec-headers"
+      
+      # ==========================================
+      # ROUTERS
+      # ==========================================
       
       # Router HTTP -> HTTPS Redirect
       - "traefik.http.routers.klynn-landing-dev-http.rule=Host(`dev.landing.getklynn.com`)"
@@ -25,14 +45,11 @@ services:
       - "traefik.http.routers.klynn-landing-dev-http.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 
-      # Router HTTPS
+      # Router HTTPS (Protegido por Auth + Headers de seguridad)
       - "traefik.http.routers.klynn-landing-dev.rule=Host(`dev.landing.getklynn.com`)"
       - "traefik.http.routers.klynn-landing-dev.entrypoints=websecure"
       - "traefik.http.routers.klynn-landing-dev.tls.certresolver=letsencrypt"
-      
-      # Middlewares: SEO headers (Anti-indexación)
-      - "traefik.http.middlewares.landing-no-index.headers.customresponseheaders.X-Robots-Tag=noindex, nofollow, noarchive"
-      - "traefik.http.routers.klynn-landing-dev.middlewares=landing-no-index"
+      - "traefik.http.routers.klynn-landing-dev.middlewares=landing-dev-chain"
       
       # Service definition
       - "traefik.http.routers.klynn-landing-dev.service=klynn-landing-dev"
