@@ -12,7 +12,7 @@ services:
     container_name: klynn-landing-dev
     restart: unless-stopped
     env_file:
-      - .env.development
+      - .env
     networks:
       - dokploy-network
     labels:
