@@ -6,7 +6,6 @@ This document provides a concise, practical reference for the SmartClean fronten
 - **Framework:** Next.js (App Router) v16.x
 - **Language:** TypeScript
 - **UI:** React 19 with Tailwind CSS v4
-- **Auth:** next-auth
 - **Validation:** Zod
 - **Hashing:** bcryptjs
 - **Linting:** ESLint
@@ -26,7 +25,6 @@ This document provides a concise, practical reference for the SmartClean fronten
 ## Project conventions & methodology
 - **App Router:** filesystem-based routes under `app/` (React Server Components by default; `"use client"` denotes client components).
 - **Server/Client split:** Keep data fetching and protected logic in server components or API routes; UI interactions and hooks live in client components.
-- **Authentication flows:** Managed by `next-auth` + a custom `auth` helper; middleware is used for route protection.
 - **Global state:** `GlobalStateProvider` provides app-wide state (user, token, theme) persisted to `localStorage`.
 
 ## Key files and folders
@@ -134,11 +132,6 @@ const initialState: State = {
 - **Persistence:** `token` and `user` are read from and written to `localStorage` keys: `sc_token` and `sc_user`.
 
 Usage: Wrap the app in `GlobalStateProvider` and use `const { state, dispatch } = useGlobalState()` in client components to read state and dispatch actions.
-
-## Authentication summary
-
-- **next-auth** manages session creation and serialization. The server-side auth helper is in `app/api/auth/auth.ts` and `app/api/auth/[...nextauth]/route.ts` handles provider callbacks.
-- **Middleware** ensures route protection and role-based redirection.
 
 ## Development tips & TODOs
 
