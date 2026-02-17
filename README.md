@@ -19,8 +19,6 @@ Este es el repositorio independiente de la landing page de Klynn, separado del m
 
 ```
 landing/
-├── app/                    # App Router de Next.js
-│   └── (public)/          # Rutas públicas
 ├── src/
 │   ├── components/
 │   │   ├── landing/       # Componentes de la landing page
