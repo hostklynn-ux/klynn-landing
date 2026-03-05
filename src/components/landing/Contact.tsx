@@ -1,13 +1,21 @@
 'use client';
 
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useToast } from "@/src/hooks/use-toast";
+import { ArrowRight } from "lucide-react";
 
 const Contact = () => {
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
+
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    propertyCount: '',
+    operationType: ''
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,120 +30,141 @@ const Contact = () => {
       });
 
       formElement.reset();
+      setFormData({ fullName: '', email: '', propertyCount: '', operationType: '' });
     });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   return (
     <section
       id="contact"
-      className="py-20 px-6 bg-gradient-to-br from-primary via-[#08352f] to-[#041a17] relative overflow-hidden"
+      className="py-32 px-6 bg-gradient-to-br from-[#0a192f] via-[#071830] to-[#020617] relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-white/5 opacity-10"></div>
+      {/* Resplandores de fondo sutiles para ambiente */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-4xl mx-auto relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-            Automatiza tus operaciones
+        
+        {/* === CABECERA DE LA SECCIÓN === */}
+        <div className="text-center mb-16 reveal-on-scroll">
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 tracking-tight">
+            Actualiza Tus Operaciones.
           </h2>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">
             Únete a property managers que están transformando su gestión operacional.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 lg:p-12 shadow-2xl space-y-6">
-
+        {/* === TARJETA DEL FORMULARIO === */}
+        <form 
+          onSubmit={handleSubmit} 
+          className="bg-[#0f172a]/90 backdrop-blur-md border border-slate-800 rounded-3xl p-8 lg:p-12 shadow-2xl space-y-8 reveal-on-scroll max-w-3xl mx-auto"
+        >
+          {/* Fila 1: Nombre y Email */}
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label htmlFor="fullName" className="text-sm font-medium text-gray-700">
+            <div className="space-y-2.5">
+              <label htmlFor="fullName" className="text-sm font-medium text-slate-300 block">
                 Nombre Completo *
               </label>
               <Input
                 id="fullName"
                 name="fullName"
-                placeholder="Juan Pérez"
-                required
                 type="text"
-                className="border-gray-300 focus-visible:ring-primary"
+                placeholder="Juan Pérez"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                required
+                className="h-12 bg-[#1e293b] border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-cyan-500 focus-visible:border-cyan-500 transition-colors"
               />
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium text-gray-700">
+            <div className="space-y-2.5">
+              <label htmlFor="email" className="text-sm font-medium text-slate-300 block">
                 Email Corporativo *
               </label>
               <Input
                 id="email"
                 name="email"
-                placeholder="juan@tuempresa.com"
-                required
                 type="email"
-                className="border-gray-300 focus-visible:ring-primary"
+                placeholder="juan@tuempresa.com"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="h-12 bg-[#1e293b] border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-cyan-500 focus-visible:border-cyan-500 transition-colors"
               />
             </div>
           </div>
 
+          {/* Fila 2: Selects */}
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label htmlFor="propertyCount" className="text-sm font-medium text-gray-700">
+            <div className="space-y-2.5">
+              <label htmlFor="propertyCount" className="text-sm font-medium text-slate-300 block">
                 Número de Propiedades *
               </label>
               <select
                 id="propertyCount"
                 name="propertyCount"
+                value={formData.propertyCount}
+                onChange={handleInputChange}
                 required
-                className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                className="w-full h-12 px-4 bg-[#1e293b] border border-slate-700 rounded-md text-white focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500 transition-colors text-sm appearance-none cursor-pointer"
+                style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: `right 0.5rem center`, backgroundRepeat: `no-repeat`, backgroundSize: `1.5em 1.5em`, paddingRight: `2.5rem` }}
               >
-                <option value="">Selecciona una opción</option>
-                <option value="1-5">1-5 propiedades</option>
-                <option value="6-10">6-10 propiedades</option>
-                <option value="11-25">11-25 propiedades</option>
-                <option value="26-50">26-50 propiedades</option>
-                <option value="50+">Más de 50 propiedades</option>
+                <option value="" className="bg-slate-900 text-slate-400">Selecciona una opción</option>
+                <option value="1-5" className="bg-slate-900">1-5 propiedades</option>
+                <option value="6-10" className="bg-slate-900">6-10 propiedades</option>
+                <option value="11-25" className="bg-slate-900">11-25 propiedades</option>
+                <option value="26-50" className="bg-slate-900">26-50 propiedades</option>
+                <option value="50+" className="bg-slate-900">Más de 50 propiedades</option>
               </select>
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor="operationType" className="text-sm font-medium text-gray-700">
+            <div className="space-y-2.5">
+              <label htmlFor="operationType" className="text-sm font-medium text-slate-300 block">
                 Tipo de Operación *
               </label>
               <select
                 id="operationType"
                 name="operationType"
+                value={formData.operationType}
+                onChange={handleInputChange}
                 required
-                className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                className="w-full h-12 px-4 bg-[#1e293b] border border-slate-700 rounded-md text-white focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500 transition-colors text-sm appearance-none cursor-pointer"
+                style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: `right 0.5rem center`, backgroundRepeat: `no-repeat`, backgroundSize: `1.5em 1.5em`, paddingRight: `2.5rem` }}
               >
-                <option value="">Selecciona una opción</option>
-                <option value="airbnb-host">Anfitrión Airbnb</option>
-                <option value="property-manager">Property Manager</option>
-                <option value="boutique-hotel">Hotel Boutique</option>
-                <option value="vacation-rental">Arriendo Vacacional</option>
-                <option value="other">Otro</option>
+                <option value="" className="bg-slate-900 text-slate-400">Selecciona una opción</option>
+                <option value="airbnb-host" className="bg-slate-900">Anfitrión Airbnb</option>
+                <option value="property-manager" className="bg-slate-900">Property Manager</option>
+                <option value="boutique-hotel" className="bg-slate-900">Hotel Boutique</option>
+                <option value="vacation-rental" className="bg-slate-900">Arriendo Vacacional</option>
+                <option value="other" className="bg-slate-900">Otro</option>
               </select>
             </div>
           </div>
 
-          <Button
-            type="submit"
-            disabled={isPending}
-            className="group w-full h-14 text-lg bg-gradient-to-r from-secondary to-primary hover:opacity-90 text-primary-foreground shadow-lg transition-all duration-300 hover:-translate-y-0.5"
-          >
-            {isPending ? "Enviando solicitud..." : "Solicitar Acceso Anticipado"}
+          {/* === BOTÓN CTA === */}
+          <div className="pt-2">
+            <Button
+              type="submit"
+              disabled={isPending}
+              className="group w-full h-14 text-white text-lg font-semibold rounded-lg transition-all duration-300 bg-gradient-to-r from-blue-600 to-[#00d2ff] hover:opacity-90 shadow-[0_0_20px_rgba(0,210,255,0.25)] hover:shadow-[0_0_30px_rgba(0,210,255,0.4)] hover:-translate-y-0.5 border-0"
+            >
+              {isPending ? "Enviando..." : "Unirse a KLYNN"}
+              {!isPending && <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />}
+            </Button>
+          </div>
 
-            {!isPending && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-              >
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            )}
-          </Button>
-
-          <p className="text-sm text-gray-500 text-center">
-            Al enviar este formulario, aceptas que KLYNN se comunique contigo sobre el producto.
+          {/* === DISCLAIMER === */}
+          <p className="text-sm text-slate-500 text-center mt-6">
+            Al enviar este formulario, aceptas que KLYNN se comunique contigo sobre la plataforma.
           </p>
         </form>
       </div>
