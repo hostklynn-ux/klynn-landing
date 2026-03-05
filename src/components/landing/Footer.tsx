@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   Facebook,
@@ -8,7 +7,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary text-white pt-16 pb-8 border-t border-border/10">
+    <footer className="bg-[#041a17] text-white pt-16 pb-8 border-t border-border/10">
       <div className="container mx-auto px-6 max-w-7xl">
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-16">
@@ -63,7 +62,7 @@ const Footer = () => {
             <h3 className="font-semibold text-lg mb-6">Legal</h3>
             <ul className="space-y-4 text-sm text-secondary-foreground">
               <li className="flex items-center gap-2">
-                <li><Link href="#" className="hover:text-primary transition-colors">Términos de servicio</Link></li>
+                <Link href="#" className="hover:text-primary transition-colors">Términos de servicio</Link>
               </li>
               <li className="flex items-center gap-2">
                 <Link href="#" className="hover:text-primary transition-colors">Política de privacidad</Link>
