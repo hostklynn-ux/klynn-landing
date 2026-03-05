@@ -34,7 +34,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden hero-section">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden hero-section">
 
       <div className="absolute inset-0 bg-gradient-to-b from-[#0B2447] via-[#071830] to-[#020617]">
 
@@ -80,7 +80,7 @@ const Hero = () => {
             size="lg"
             className="relative group inline-flex items-center justify-center gap-2 px-10 py-7 text-white font-medium text-lg transition-all duration-300 bg-gradient-to-r from-[#1d4ed8] to-[#06b6d4] hover:from-[#1e40af] hover:to-[#0891b2] shadow-[0_4px_20px_rgba(6,182,212,0.3)] hover:shadow-[0_4px_25px_rgba(6,182,212,0.5)] border-0"
             onClick={() => {
-              const el = document?.getElementById('cta-form');
+              const el = document?.getElementById('contact');
               if (el) {
                 el.scrollIntoView({ behavior: 'smooth' });
               }
