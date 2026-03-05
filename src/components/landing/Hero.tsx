@@ -3,6 +3,7 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "../ui/button";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -62,23 +63,21 @@ const Hero = () => {
         </div>
 
         <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-tight tracking-tight animate-fade-in-up-delay-1">
-          Operaciones Nivel Hotel.
+          La fricción operativa en la limpieza
           <br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00d2ff] to-[#3b82f6]">
-            Totalmente Automatizadas.
+            tiene costo directo en tu rentabilidad.
           </span>
         </h1>
 
         <p className="text-xl lg:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed animate-fade-in-up-delay-2">
-          Coordinación de limpieza impulsada por IA en segundos.
-          <br />
-          Calidad premium. Control absoluto. Cero fricción.
+          Automatiza la coordinación entre check-out y check-in en tus propiedades de renta corta.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 animate-fade-in-up-delay-3">
+
           <Button
-            size="lg"
-            className="relative group inline-flex items-center justify-center gap-2 px-10 py-7 text-white font-medium text-lg transition-all duration-300 bg-gradient-to-r from-[#1d4ed8] to-[#06b6d4] hover:from-[#1e40af] hover:to-[#0891b2] shadow-[0_4px_20px_rgba(6,182,212,0.3)] hover:shadow-[0_4px_25px_rgba(6,182,212,0.5)] border-0"
+            className="relative group inline-flex items-center justify-center gap-2 px-10 py-7 text-white font-medium text-lg transition-all duration-300 bg-gradient-to-r from-[#1d4ed8] to-[#06b6d4] hover:from-[#1e40af] hover:to-[#0891b2] shadow-[0_4px_20px_rgba(6,182,212,0.3)] hover:shadow-[0_4px_25px_rgba(6,182,212,0.5)] border-0 rounded-xl"
             onClick={() => {
               const el = document?.getElementById('contact');
               if (el) {
@@ -86,9 +85,19 @@ const Hero = () => {
               }
             }}
           >
-            Automatizar Mis Operaciones
+            Solicitar acceso
             <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
           </Button>
+
+          <Button
+            className="inline-flex items-center justify-center px-10 py-7 text-white font-medium text-lg transition-all duration-300 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#00d2ff]/40 rounded-xl backdrop-blur-sm"
+          >
+            <Link href="#how-klynn-works">
+              Cómo funciona
+            </Link>
+          </Button>
+
+
         </div>
 
         <div className="flex items-center justify-center gap-12 pt-12 animate-fade-in-up-delay-4">
