@@ -11,7 +11,7 @@ const PremiumVideo = () => {
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover opacity-60"
+          className="w-full h-full object-cover opacity-90"
           poster="https://images.pexels.com/photos/6195277/pexels-photo-6195277.jpeg?auto=compress&cs=tinysrgb&w=1920"
         >
           <source src="https://cdn.pixabay.com/video/2020/07/10/44490-439797933_large.mp4" type="video/mp4" />
