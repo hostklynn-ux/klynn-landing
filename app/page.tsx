@@ -2,7 +2,9 @@
 
 import Contact from "@/src/components/landing/Contact";
 import Hero from "@/src/components/landing/Hero";
+import HowKlynnWorks from "@/src/components/landing/HowKlynnWorks";
 import PainPoints from "@/src/components/landing/PainPoints";
+import PremiumVideo from "@/src/components/landing/PremiumVideo";
 import Solution from "@/src/components/landing/Solution";
 import Testimonials from "@/src/components/landing/Testimonials";
 
@@ -12,6 +14,8 @@ const Landing = () => {
       <Hero />
       <PainPoints />
       <Solution />
+      <PremiumVideo />
+      <HowKlynnWorks />
       <Testimonials />
       <Contact />
     </>
