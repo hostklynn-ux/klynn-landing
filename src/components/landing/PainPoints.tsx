@@ -33,12 +33,6 @@ const PainPoints = () => {
       <div className="max-w-7xl mx-auto relative z-10">
 
         <div className="text-center mb-20 reveal-on-scroll">
-          <div className="inline-block mb-4">
-            <span className="text-sm font-bold text-[#00d2ff] tracking-wider uppercase">
-              El Problema
-            </span>
-          </div>
-
           <h2 className="text-5xl font-bold text-white mb-6">
             El Caos Operativo <span className="text-slate-500">No Escala</span>
           </h2>

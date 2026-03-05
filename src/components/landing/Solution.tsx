@@ -18,9 +18,6 @@ const Solution = () => {
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-20 reveal-on-scroll">
-            <div className="inline-block mb-4">
-              <span className="text-sm font-semibold text-blue-400 tracking-wider uppercase">La Solución</span>
-            </div>
             <h2 className="text-5xl font-bold text-white mb-6">
               Automatización Inteligente <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Impulsada por IA</span>
             </h2>
