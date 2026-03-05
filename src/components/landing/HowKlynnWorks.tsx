@@ -5,7 +5,7 @@ import { CheckCircle2, Sparkles, Target } from "lucide-react";
 const steps = [
   {
     step: "01",
-    title: "Publica Tu Necesidad",
+    title: "Activas el servicio",
     description: "Check-out detectado automáticamente o solicitud manual. El sistema se activa instantáneamente.",
     icon: Target,
     gradient: "from-blue-500 to-blue-600",
@@ -13,7 +13,7 @@ const steps = [
   },
   {
     step: "02",
-    title: "IA Asigna al Mejor",
+    title: "El sistema asigna automáticamente",
     description: "Algoritmo evalúa proximidad, disponibilidad, especialización y desempeño histórico en milisegundos.",
     icon: Sparkles,
     gradient: "from-[#00d2ff] to-blue-500",
@@ -21,7 +21,7 @@ const steps = [
   },
   {
     step: "03",
-    title: "Servicio Ejecutado",
+    title: "Ejecución y seguimiento en tiempo real",
     description: "Protocolo hotel-level ejecutado. Verificación de calidad. Propiedad lista. Notificación automática.",
     icon: CheckCircle2,
     gradient: "from-blue-600 to-[#0891b2]",
@@ -50,7 +50,7 @@ const HowKlynnWorks = () => {
                   <step.icon className="w-8 h-8 text-white" strokeWidth={2} />
                 </div>
 
-                <div className="text-7xl font-black text-slate-100 mb-4 tracking-tighter leading-none select-none">
+                <div className="text-7xl font-black text-[#0B2447] mb-4 tracking-tighter leading-none select-none">
                   {step.step}
                 </div>
 
