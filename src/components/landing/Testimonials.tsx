@@ -70,7 +70,7 @@ const Testimonials = () => {
   return (
     <section id="testimonials" className="py-32 px-6 bg-gradient-to-b from-white to-slate-50">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* === CABECERA === */}
         <div className="text-center mb-20 reveal-on-scroll">
           <div className="inline-block mb-4">
@@ -87,7 +87,7 @@ const Testimonials = () => {
         {/* === SHOWCASE: VIDEO + CARRUSEL FLOTANTE === */}
         <div className="mb-20 reveal-on-scroll">
           <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 group">
-            
+
             {/* Video de Fondo (Visible) */}
             <video
               autoPlay
@@ -100,13 +100,13 @@ const Testimonials = () => {
               <source src="https://videos.pexels.com/video-files/3209828/3209828-sd_640_360_25fps.mp4" type="video/mp4" />
               Su navegador no soporta el tag de video.
             </video>
-            
+
             {/* Overlay Gradiente (Fuerte abajo, transparente arriba) */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f]/95 via-[#0a192f]/40 to-transparent flex items-end">
-              
+
               {/* Contenedor del contenido del Carrusel (Sin cajas, directamente sobre el video) */}
               <div className="p-8 md:p-16 w-full flex flex-col md:flex-row md:items-end justify-between gap-8">
-                
+
                 {/* Lado Izquierdo: Textos del Testimonio */}
                 <div className="max-w-3xl">
                   {/* Estrellas y Etiqueta (Fijas) */}
@@ -151,14 +151,14 @@ const Testimonials = () => {
                 <div className="flex flex-col items-start md:items-end gap-6 shrink-0 z-20">
                   {/* Flechas */}
                   <div className="flex gap-3">
-                    <button 
+                    <button
                       onClick={prevTestimonial}
                       className="p-3 rounded-full bg-white/10 hover:bg-[#00d2ff] text-white backdrop-blur-sm transition-colors shadow-lg"
                       aria-label="Anterior"
                     >
                       <ChevronLeft className="w-6 h-6" />
                     </button>
-                    <button 
+                    <button
                       onClick={nextTestimonial}
                       className="p-3 rounded-full bg-white/10 hover:bg-[#00d2ff] text-white backdrop-blur-sm transition-colors shadow-lg"
                       aria-label="Siguiente"
@@ -166,18 +166,17 @@ const Testimonials = () => {
                       <ChevronRight className="w-6 h-6" />
                     </button>
                   </div>
-                  
+
                   {/* Puntos Indicadores */}
                   <div className="flex gap-2">
                     {testimonials.map((_, index) => (
                       <button
                         key={index}
                         onClick={() => setCurrentIndex(index)}
-                        className={`transition-all duration-300 rounded-full h-1.5 ${
-                          currentIndex === index 
-                            ? "w-8 bg-[#00d2ff]" 
+                        className={`transition-all duration-300 rounded-full h-1.5 ${currentIndex === index
+                            ? "w-8 bg-[#00d2ff]"
                             : "w-2 bg-white/30 hover:bg-white/60"
-                        }`}
+                          }`}
                         aria-label={`Ir al testimonio ${index + 1}`}
                       />
                     ))}

@@ -47,28 +47,24 @@ const Contact = () => {
       id="contact"
       className="py-32 px-6 bg-gradient-to-br from-[#0a192f] via-[#071830] to-[#020617] relative overflow-hidden"
     >
-      {/* Resplandores de fondo sutiles para ambiente */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-4xl mx-auto relative z-10">
-        
-        {/* === CABECERA DE LA SECCIÓN === */}
+
         <div className="text-center mb-16 reveal-on-scroll">
           <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 tracking-tight">
-            Actualiza Tus Operaciones.
+            La rentabilidad depende de la operación.
           </h2>
-          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">
-            Únete a property managers que están transformando su gestión operacional.
-          </p>
+          <h3 className="text-xl md:text-2xl text-slate-400 font-medium tracking-wide">
+            Acceso para operadores activos.
+          </h3>
         </div>
 
-        {/* === TARJETA DEL FORMULARIO === */}
-        <form 
-          onSubmit={handleSubmit} 
+        <form
+          onSubmit={handleSubmit}
           className="bg-[#0f172a]/90 backdrop-blur-md border border-slate-800 rounded-3xl p-8 lg:p-12 shadow-2xl space-y-8 reveal-on-scroll max-w-3xl mx-auto"
         >
-          {/* Fila 1: Nombre y Email */}
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2.5">
               <label htmlFor="fullName" className="text-sm font-medium text-slate-300 block">
@@ -103,7 +99,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Fila 2: Selects */}
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2.5">
               <label htmlFor="propertyCount" className="text-sm font-medium text-slate-300 block">
@@ -150,19 +145,17 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* === BOTÓN CTA === */}
           <div className="pt-2">
             <Button
               type="submit"
               disabled={isPending}
               className="group w-full h-14 text-white text-lg font-semibold rounded-lg transition-all duration-300 bg-gradient-to-r from-blue-600 to-[#00d2ff] hover:opacity-90 shadow-[0_0_20px_rgba(0,210,255,0.25)] hover:shadow-[0_0_30px_rgba(0,210,255,0.4)] hover:-translate-y-0.5 border-0"
             >
-              {isPending ? "Enviando..." : "Unirse a KLYNN"}
+              {isPending ? "Enviando..." : "Solicitar acceso a KLYNN"}
               {!isPending && <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />}
             </Button>
           </div>
 
-          {/* === DISCLAIMER === */}
           <p className="text-sm text-slate-500 text-center mt-6">
             Al enviar este formulario, aceptas que KLYNN se comunique contigo sobre la plataforma.
           </p>
