@@ -6,15 +6,30 @@ import {
   Activity,
   CheckCircle2,
   Award,
-  ArrowRight
+  CalendarCheck,
+  Cpu,
+  Smartphone
 } from "lucide-react";
 
-const itemList = [
-  "Detección automática de check-out",
-  "Asignación por proximidad y especialidad",
-  "Protocolos estandarizados nivel hotel",
-  "Supervisión en tiempo real",
-  "Verificación de calidad con evidencia fotográfica"
+const mainSteps = [
+  {
+    step: "01",
+    icon: CalendarCheck,
+    title: "Publicas la necesidad.",
+    description: "Sincroniza tus reservas o solicita servicios manualmente en segundos. Olvídate de escribir por WhatsApp a ver quién está disponible."
+  },
+  {
+    step: "02",
+    icon: Cpu,
+    title: "El sistema gestiona.",
+    description: "Nuestra IA evalúa historial de calidad, proximidad y especialidad para asignar automáticamente al profesional óptimo para tu propiedad."
+  },
+  {
+    step: "03",
+    icon: Smartphone,
+    title: "Tú supervisas.",
+    description: "Recibe notificaciones en tiempo real, estatus del servicio y fotografías del trabajo finalizado directamente en tu panel de control."
+  }
 ];
 
 const steps = [
@@ -23,6 +38,14 @@ const steps = [
   { icon: Activity, label: "Asignación", desc: "Personal óptimo" },
   { icon: CheckCircle2, label: "Ejecución", desc: "Servicio en curso" },
   { icon: Award, label: "Verificado", desc: "Calidad confirmada" }
+];
+
+const itemList = [
+  "Detección automática de check-out",
+  "Asignación por proximidad y especialidad",
+  "Protocolos estandarizados nivel hotel",
+  "Supervisión en tiempo real",
+  "Verificación de calidad con evidencia fotográfica"
 ];
 
 const Solution = () => {
@@ -45,26 +68,34 @@ const Solution = () => {
             </span>
           </h2>
 
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-10">
+          <h3 className="text-xl text-slate-400 max-w-3xl mx-auto mb-16">
             KLYNN automatiza la asignación y ejecución de servicios operativos.
-          </p>
+          </h3>
+        </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-            <div className="bg-[#152a4a]/50 border border-slate-700/50 backdrop-blur-sm px-6 py-3 rounded-full text-slate-300 font-medium flex items-center gap-3">
-              <span className="bg-blue-600/30 text-blue-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">1</span>
-              Publicas la necesidad.
+        <div className="grid md:grid-cols-3 gap-8 mb-32 reveal-on-scroll">
+          {mainSteps.map((step, index) => (
+            <div
+              key={index}
+              className="relative bg-[#0f172a]/60 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-8 hover:-translate-y-2 hover:border-[#00d2ff]/30 hover:shadow-[0_15px_30px_rgba(0,210,255,0.1)] transition-all duration-300 group overflow-hidden"
+            >
+              <div className="absolute -top-6 -right-2 text-8xl font-black text-slate-800/30 select-none group-hover:text-slate-800/50 transition-colors duration-300 pointer-events-none">
+                {step.step}
+              </div>
+
+              <div className="w-14 h-14 bg-blue-900/30 border border-blue-500/20 rounded-2xl flex items-center justify-center mb-8 relative z-10 group-hover:bg-[#00d2ff]/10 transition-colors duration-300">
+                <step.icon className="w-7 h-7 text-[#00d2ff]" strokeWidth={1.5} />
+              </div>
+
+              <h3 className="text-2xl font-bold text-white mb-4 relative z-10">
+                {step.title}
+              </h3>
+
+              <p className="text-slate-400 leading-relaxed font-medium relative z-10">
+                {step.description}
+              </p>
             </div>
-            <ArrowRight className="w-5 h-5 text-slate-600 hidden sm:block" />
-            <div className="bg-[#152a4a]/50 border border-slate-700/50 backdrop-blur-sm px-6 py-3 rounded-full text-slate-300 font-medium flex items-center gap-3">
-              <span className="bg-[#00d2ff]/30 text-[#00d2ff] w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">2</span>
-              El sistema gestiona.
-            </div>
-            <ArrowRight className="w-5 h-5 text-slate-600 hidden sm:block" />
-            <div className="bg-[#152a4a]/50 border border-slate-700/50 backdrop-blur-sm px-6 py-3 rounded-full text-white font-semibold flex items-center gap-3 border-b-[#00d2ff]/50 shadow-[0_4px_20px_rgba(0,210,255,0.1)]">
-              <span className="bg-emerald-500/30 text-emerald-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">3</span>
-              Tú supervisas.
-            </div>
-          </div>
+          ))}
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 items-center mb-24 reveal-on-scroll">
@@ -78,6 +109,7 @@ const Solution = () => {
             </div>
           ))}
         </div>
+
         <div className="reveal-on-scroll">
           <div className="bg-[#0f172a]/80 backdrop-blur-xl border border-slate-800 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-2xl">
 
@@ -123,9 +155,11 @@ const Solution = () => {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
