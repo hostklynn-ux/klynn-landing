@@ -63,16 +63,16 @@ const Hero = () => {
         </div>
 
         <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-tight tracking-tight animate-fade-in-up-delay-1">
-          La fricción operativa en la limpieza
+          Automatiza la limpieza
           <br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00d2ff] to-[#3b82f6]">
-            tiene costo directo en tu rentabilidad.
+            entre check-out y check-in.
           </span>
         </h1>
 
-        <p className="text-xl lg:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed animate-fade-in-up-delay-2">
-          Automatiza la coordinación entre check-out y check-in en tus propiedades de renta corta.
-        </p>
+        <h3 className="text-xl lg:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed animate-fade-in-up-delay-2">
+          KLYNN coordina automáticamente cleaners para propiedades de renta corta.
+        </h3>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 animate-fade-in-up-delay-3">
 
@@ -93,7 +93,7 @@ const Hero = () => {
             className="inline-flex items-center justify-center px-10 py-7 text-white font-medium text-lg transition-all duration-300 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#00d2ff]/40 rounded-xl backdrop-blur-sm"
           >
             <Link href="#how-klynn-works">
-              Cómo funciona
+              Ver cómo funciona
             </Link>
           </Button>
 
