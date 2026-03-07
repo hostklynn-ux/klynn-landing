@@ -8,27 +8,38 @@ import {
   Award,
   CalendarCheck,
   Cpu,
-  Smartphone
+  Smartphone,
+  UserCheck
 } from "lucide-react";
 
 const mainSteps = [
   {
     step: "01",
+    flow: "Propiedad",
     icon: CalendarCheck,
-    title: "Publicas la necesidad.",
-    description: "Sincroniza tus reservas o solicita servicios manualmente en segundos. Olvídate de escribir por WhatsApp a ver quién está disponible."
+    title: "Publicas la limpieza.",
+    description: "Sincroniza tus reservas o solicita servicios en un par de clics."
   },
   {
     step: "02",
+    flow: "Asignación",
     icon: Cpu,
-    title: "El sistema gestiona.",
-    description: "Nuestra IA evalúa historial de calidad, proximidad y especialidad para asignar automáticamente al profesional óptimo para tu propiedad."
+    title: "KLYNN asigna automáticamente.",
+    description: "La IA selecciona al profesional óptimo según historial y proximidad."
   },
   {
     step: "03",
+    flow: "Cleaner",
+    icon: UserCheck,
+    title: "El servicio se ejecuta.",
+    description: "Limpieza impecable siguiendo estrictos protocolos nivel hotel."
+  },
+  {
+    step: "04",
+    flow: "Servicio ejecutado",
     icon: Smartphone,
     title: "Tú supervisas.",
-    description: "Recibe notificaciones en tiempo real, estatus del servicio y fotografías del trabajo finalizado directamente en tu panel de control."
+    description: "Recibe notificaciones en tiempo real y fotos del trabajo terminado."
   }
 ];
 
@@ -73,25 +84,31 @@ const Solution = () => {
           </h3>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-32 reveal-on-scroll">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-32 reveal-on-scroll">
           {mainSteps.map((step, index) => (
             <div
               key={index}
-              className="relative bg-[#0f172a]/60 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-8 hover:-translate-y-2 hover:border-[#00d2ff]/30 hover:shadow-[0_15px_30px_rgba(0,210,255,0.1)] transition-all duration-300 group overflow-hidden"
+              className="relative bg-[#0f172a]/60 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-6 lg:p-8 hover:-translate-y-2 hover:border-[#00d2ff]/30 hover:shadow-[0_15px_30px_rgba(0,210,255,0.1)] transition-all duration-300 group overflow-hidden flex flex-col"
             >
-              <div className="absolute -top-6 -right-2 text-8xl font-black text-slate-800/30 select-none group-hover:text-slate-800/50 transition-colors duration-300 pointer-events-none">
+              <div className="absolute -top-6 -right-2 text-8xl font-black text-slate-800/30 select-none group-hover:text-slate-800/50 transition-colors duration-300 pointer-events-none z-0">
                 {step.step}
               </div>
 
-              <div className="w-14 h-14 bg-blue-900/30 border border-blue-500/20 rounded-2xl flex items-center justify-center mb-8 relative z-10 group-hover:bg-[#00d2ff]/10 transition-colors duration-300">
-                <step.icon className="w-7 h-7 text-[#00d2ff]" strokeWidth={1.5} />
+              <div className="inline-flex items-center mb-6 relative z-10">
+                <span className="text-[10px] md:text-xs font-bold text-[#00d2ff] bg-[#00d2ff]/10 border border-[#00d2ff]/20 px-3 py-1 rounded-full uppercase tracking-wider">
+                  {step.flow}
+                </span>
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-4 relative z-10">
+              <div className="w-12 h-12 lg:w-14 lg:h-14 bg-blue-900/30 border border-blue-500/20 rounded-2xl flex items-center justify-center mb-6 relative z-10 group-hover:bg-[#00d2ff]/10 transition-colors duration-300">
+                <step.icon className="w-6 h-6 lg:w-7 lg:h-7 text-[#00d2ff]" strokeWidth={1.5} />
+              </div>
+
+              <h3 className="text-xl lg:text-2xl font-bold text-white mb-3 relative z-10 leading-tight">
                 {step.title}
               </h3>
 
-              <p className="text-slate-400 leading-relaxed font-medium relative z-10">
+              <p className="text-sm text-slate-400 leading-relaxed font-medium relative z-10 mt-auto">
                 {step.description}
               </p>
             </div>
