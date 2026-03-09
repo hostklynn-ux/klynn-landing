@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
-  { label: "Cómo funciona", href: "#how-klynn-works" },
   { label: "Solución", href: "#solution" },
   { label: "Precios", href: "#pricing" },
   { label: "Acceso", href: "#contact" },

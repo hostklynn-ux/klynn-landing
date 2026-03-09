@@ -82,7 +82,7 @@ const Hero = () => {
           </Button>
 
           <Link 
-            href="#how-klynn-works"
+            href="#solution"
             className="flex items-center justify-center w-full sm:w-auto px-8 h-[52px] text-white font-medium text-[16px] sm:text-lg transition-all duration-300 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#00d2ff]/40 rounded-xl backdrop-blur-sm"
           >
             Ver cómo funciona
