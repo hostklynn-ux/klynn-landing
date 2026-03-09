@@ -15,22 +15,22 @@ const painPointsData = [
   {
     icon: MessageSquare,
     title: "Mensajes constantes",
-    description: "Cientos de mensajes diarios por WhatsApp y llamadas. Coordinación fragmentada que consume horas de tu día.",
+    description: "Coordinación manual con cleaners.",
   },
   {
     icon: ClipboardList,
     title: "Confirmaciones manuales",
-    description: "Perseguir a tu equipo para asegurar su asistencia y perder tiempo verificando si el trabajo realmente se terminó.",
+    description: "Cancelaciones inesperadas.",
   },
   {
     icon: AlertCircle,
-    title: "Ajustes de último minuto",
-    description: "Cambios de horario, nuevas reservas o cancelaciones del personal que te obligan a apagar incendios constantemente.",
+    title: "Cambios de último minuto",
+    description: "Check-outs que cambian.",
   },
   {
     icon: EyeOff,
-    title: "Seguimiento operativo",
-    description: "Cero visibilidad en tiempo real. Operar a ciegas y cruzar los dedos esperando que la limpieza cumpla el estándar.",
+    title: "Falta de visibilidad",
+    description: "No sabes si la limpieza se hizo bien.",
   }
 ];
 
@@ -38,22 +38,22 @@ const invisibleCosts = [
   {
     icon: Clock,
     title: "Horas improductivas.",
-    description: "Tiempo valioso perdido en coordinación manual en lugar de estrategias para escalar tu negocio."
+    description: "Tiempo valioso perdido en coordinación en lugar de escalar tu negocio."
   },
   {
     icon: UserCog,
     title: "Dependencia operativa.",
-    description: "Tu negocio se detiene si no estás pegado al teléfono supervisando cada detalle de la limpieza."
+    description: "Tu negocio se detiene si no supervisas cada limpieza en persona."
   },
   {
     icon: Hourglass,
     title: "Riesgo de retrasos.",
-    description: "Un solo fallo en la comunicación genera un efecto dominó que retrasa los check-ins de tus huéspedes."
+    description: "Un fallo en la comunicación retrasa los check-ins de tus huéspedes."
   },
   {
     icon: TrendingDown,
     title: "Inconsistencia en ejecución.",
-    description: "Falta de estandarización que resulta en quejas recurrentes, devoluciones y malas reseñas."
+    description: "Estándares variables que resultan en quejas y malas reseñas."
   }
 ];
 
@@ -64,31 +64,30 @@ const PainPoints = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
 
-        <div className="text-center mb-20 reveal-on-scroll">
-
+        <div className="text-center mb-16 reveal-on-scroll">
           <h2 className="text-5xl font-bold text-white mb-6">
-            El Caos Operativo <span className="text-slate-500">No Escala</span>
+            Coordinar limpiezas <span className="text-slate-500">no debería ser tu trabajo.</span>
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
-            La coordinación manual destruye la eficiencia y la calidad.
-          </p>
+          <h3 className="text-xl text-slate-400 max-w-3xl mx-auto">
+            La operación entre check-out y check-in suele depender de mensajes, confirmaciones y seguimiento constante.
+          </h3>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-20">
           {painPointsData.map((problem, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 reveal-on-scroll shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:-translate-y-2 transition-all duration-300 group flex flex-col"
+              className="bg-white rounded-2xl p-6 border border-slate-100 reveal-on-scroll shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex flex-col"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <problem.icon
-                className="w-12 h-12 text-[#ff4d4d] mb-6 transition-transform duration-300 group-hover:scale-110 shrink-0"
-                strokeWidth={1.5}
+                className="w-7 h-7 text-[#ff4d4d] mb-4 transition-transform duration-300 group-hover:scale-110 shrink-0"
+                strokeWidth={2}
               />
-              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">
+              <h3 className="text-lg font-bold text-slate-900 mb-2 leading-tight">
                 {problem.title}
               </h3>
-              <p className="text-slate-600 leading-relaxed font-medium">
+              <p className="text-slate-600 leading-relaxed font-medium text-sm line-clamp-2">
                 {problem.description}
               </p>
             </div>
@@ -107,25 +106,30 @@ const PainPoints = () => {
 
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
-                La pérdida no siempre <span className="text-slate-500">es visible.</span>
+                El problema no es el cleaner
+                <br />
+                <span className="text-slate-500">Es el sistema.</span>
               </h2>
+              <h3 className="text-xl text-slate-400 max-w-3xl mx-auto">
+                Cuando la coordinación depende de personas, la operación se vuelve frágil y difícil de escalar.
+              </h3>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-16">
               {invisibleCosts.map((cost, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-2xl p-8 reveal-on-scroll shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:-translate-y-2 transition-all duration-300 group flex flex-col"
+                  className="bg-white rounded-2xl p-6 border border-slate-100 reveal-on-scroll shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex flex-col"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <cost.icon
-                    className="w-12 h-12 text-[#ff4d4d] mb-6 transition-transform duration-300 group-hover:scale-110 shrink-0"
-                    strokeWidth={1.5}
+                    className="w-7 h-7 text-[#ff4d4d] mb-4 transition-transform duration-300 group-hover:scale-110 shrink-0"
+                    strokeWidth={2}
                   />
-                  <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">
+                  <h3 className="text-lg font-bold text-slate-900 mb-2 leading-tight">
                     {cost.title}
                   </h3>
-                  <p className="text-slate-600 leading-relaxed font-medium">
+                  <p className="text-slate-600 leading-relaxed font-medium text-sm line-clamp-2">
                     {cost.description}
                   </p>
                 </div>
@@ -143,14 +147,11 @@ const PainPoints = () => {
 
         <div className="pt-20 border-t border-slate-800/60 reveal-on-scroll">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-
             <div>
-
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight leading-tight">
                 El problema no es el cleaner. <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#3b82f6]">Es el sistema.</span>
               </h2>
-
               <p className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-xl">
                 Tus profesionales de limpieza pueden ser los mejores, pero si la infraestructura que los coordina es frágil, los resultados siempre serán inconsistentes. Automatizar es la única vía para escalar.
               </p>
