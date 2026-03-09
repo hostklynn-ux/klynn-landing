@@ -1,31 +1,27 @@
 'use client';
 
-import { Home, Briefcase, Building2, Star } from "lucide-react";
+import { Home, Briefcase, Building2, Star, Sparkles } from "lucide-react";
 
 const targetAudiences = [
   {
-    title: "Hosts profesionales",
-    description: "Estandariza tu calidad y libera tu tiempo para enfocarte en crecer tu negocio, no en coordinar limpiezas.",
+    title: "Hosts de Airbnb",
     icon: Home,
-    image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "Property managers",
-    description: "Escala tu portafolio de propiedades manteniendo el control absoluto y la visibilidad de cada operación diaria.",
     icon: Briefcase,
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "Operadores multi-unidad",
-    description: "Sincroniza volúmenes altos de check-outs y check-ins simultáneos con eficiencia quirúrgica y cero fallos.",
     icon: Building2,
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
   },
   {
-    title: "Hoteles boutique",
-    description: "Mantén estándares de lujo cinco estrellas con una infraestructura operativa completamente invisible e impecable.",
+    title: "Hoteles Boutique",
     icon: Star,
-    image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    title: "Empresas de limpieza",
+    icon: Sparkles,
   }
 ];
 
@@ -40,9 +36,9 @@ const TargetAudience = () => {
         <div className="text-center mb-24 reveal-on-scroll">
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight leading-[1.1]">
-            No es un marketplace. <br className="hidden md:block" />
+            Diseñado para operadores <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1d4ed8] to-[#00d2ff]">
-              No es intermediación manual.
+              de renta corta.
             </span>
           </h2>
 
@@ -51,39 +47,21 @@ const TargetAudience = () => {
           </h3>
         </div>
 
-        <div className="mb-24 reveal-on-scroll">
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mb-32 reveal-on-scroll">
+          <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
             {targetAudiences.map((item, index) => (
               <div
                 key={index}
-                className="relative h-[22rem] rounded-[2rem] overflow-hidden group shadow-[0_15px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_40px_rgba(0,210,255,0.15)] transition-all duration-500 hover:-translate-y-2 cursor-pointer"
-                style={{ animationDelay: `${index * 150}ms` }}
+                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-[#0f172a]/60 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 flex items-center gap-6 hover:border-[#00d2ff]/40 hover:bg-[#0f172a]/90 hover:shadow-[0_10px_30px_rgba(0,210,255,0.1)] transition-all duration-300 group hover:-translate-y-1 cursor-default"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] via-[#0a192f]/80 to-transparent"></div>
-
-                <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-[#00d2ff]/20 transition-colors duration-500"></div>
-
-                <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                  <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-4 group-hover:bg-[#00d2ff]/80 group-hover:border-[#00d2ff] transition-all duration-300 shrink-0">
-                    <item.icon className="w-6 h-6 text-white" strokeWidth={2} />
-                  </div>
-
-                  <h4 className="text-xl font-bold text-white tracking-tight mb-2">
-                    {item.title}
-                  </h4>
-
-                  <p className="text-slate-300 text-sm leading-relaxed font-medium">
-                    {item.description}
-                  </p>
+                <div className="w-14 h-14 shrink-0 rounded-xl bg-blue-900/30 border border-blue-500/20 flex items-center justify-center group-hover:bg-[#00d2ff]/20 group-hover:border-[#00d2ff]/50 transition-colors duration-300">
+                  <item.icon className="w-7 h-7 text-[#00d2ff]" strokeWidth={2} />
                 </div>
 
+                <h4 className="text-lg md:text-xl font-bold text-white tracking-tight leading-tight">
+                  {item.title}
+                </h4>
               </div>
             ))}
           </div>
