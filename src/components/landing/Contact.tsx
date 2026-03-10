@@ -52,6 +52,34 @@ const Contact = () => {
 
   return (
     <>
+      <section className="relative py-24 px-6 overflow-hidden bg-gradient-to-br from-[#1d4ed8] via-[#0ea5e9] to-[#00d2ff]">
+        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:32px_32px]"></div>
+
+        <div className="max-w-4xl mx-auto relative z-10 text-center flex flex-col items-center reveal-on-scroll">
+
+          <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 shadow-xl">
+            <Zap className="w-8 h-8 text-white fill-white" />
+          </div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
+            Automatiza la limpieza <br className="hidden sm:block" />
+            de tus propiedades.
+          </h2>
+
+          <p className="text-xl md:text-2xl text-blue-50 font-medium mb-12">
+            Empieza con KLYNN.
+          </p>
+
+          <Button
+            onClick={scrollToForm}
+            className="group relative flex items-center justify-center w-full sm:w-auto px-10 h-16 bg-white text-blue-600 hover:bg-slate-50 font-bold text-lg transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1 rounded-2xl border-0"
+          >
+            Solicitar acceso
+            <ArrowRight className="ml-2 w-5 h-5 text-blue-600 transition-transform duration-300 group-hover:translate-x-1" />
+          </Button>
+
+        </div>
+      </section>
       <section
         id="acceso"
         className="py-32 px-6 bg-gradient-to-br from-[#0a192f] via-[#071830] to-[#020617] relative overflow-hidden"
@@ -63,7 +91,7 @@ const Contact = () => {
           <div className="text-center mb-16 reveal-on-scroll">
             <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 tracking-tight">
               Solicita acceso anticipado
-              <br/>
+              <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1d4ed8] to-[#00d2ff]">
                 a KLYNN
               </span>
@@ -192,35 +220,6 @@ const Contact = () => {
               Al enviar este formulario, aceptas que KLYNN se comunique contigo sobre la plataforma.
             </p>
           </form>
-        </div>
-      </section>
-
-      <section className="relative py-24 px-6 overflow-hidden bg-gradient-to-br from-[#1d4ed8] via-[#0ea5e9] to-[#00d2ff]">
-        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:32px_32px]"></div>
-        
-        <div className="max-w-4xl mx-auto relative z-10 text-center flex flex-col items-center reveal-on-scroll">
-          
-          <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 shadow-xl">
-            <Zap className="w-8 h-8 text-white fill-white" />
-          </div>
-
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
-            Automatiza la limpieza <br className="hidden sm:block" />
-            de tus propiedades.
-          </h2>
-          
-          <p className="text-xl md:text-2xl text-blue-50 font-medium mb-12">
-            Empieza con KLYNN.
-          </p>
-
-          <Button
-            onClick={scrollToForm}
-            className="group relative flex items-center justify-center w-full sm:w-auto px-10 h-16 bg-white text-blue-600 hover:bg-slate-50 font-bold text-lg transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1 rounded-2xl border-0"
-          >
-            Solicitar acceso
-            <ArrowRight className="ml-2 w-5 h-5 text-blue-600 transition-transform duration-300 group-hover:translate-x-1" />
-          </Button>
-
         </div>
       </section>
     </>
