@@ -35,29 +35,28 @@ const Benefits = () => {
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
+        {/* === GRID HORIZONTAL (4 Columnas en Desktop) === */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
           {benefitsData.map((benefit, index) => (
             <div 
               key={index} 
               className="reveal-on-scroll" 
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="bg-white rounded-2xl p-8 h-full shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-200 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgb(0,0,0,0.06)] transition-all duration-300 flex items-start gap-4 group">
+              {/* Tarjeta con layout vertical interno y texto centrado */}
+              <div className="bg-white rounded-2xl p-6 h-full shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-200 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgb(0,0,0,0.06)] transition-all duration-300 flex flex-col items-center text-center group">
 
-                <div className="shrink-0 mt-1">
-                  <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors duration-300">
-                    <CheckCircle2 className="w-5 h-5 text-[#3b82f6]" strokeWidth={2.5} />
-                  </div>
+                {/* Ícono centrado arriba */}
+                <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors duration-300 shrink-0">
+                  <CheckCircle2 className="w-7 h-7 text-[#3b82f6] transition-transform duration-300 group-hover:scale-110" strokeWidth={2.5} />
                 </div>
 
-                <div>
-                  <h3 className="text-xl font-bold text-[#0B2447] mb-2 tracking-tight leading-tight">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-slate-600 leading-relaxed font-medium text-sm md:text-base">
-                    {benefit.description}
-                  </p>
-                </div>
+                <h3 className="text-lg font-bold text-[#0B2447] mb-2 tracking-tight leading-tight">
+                  {benefit.title}
+                </h3>
+                <p className="text-slate-600 leading-relaxed font-medium text-sm">
+                  {benefit.description}
+                </p>
 
               </div>
             </div>
