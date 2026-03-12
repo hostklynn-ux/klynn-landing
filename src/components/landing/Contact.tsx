@@ -52,7 +52,7 @@ const Contact = () => {
 
   return (
     <>
-      <section className="relative py-24 px-6 overflow-hidden bg-gradient-to-br from-[#1d4ed8] via-[#0ea5e9] to-[#00d2ff]">
+      <section className="relative py-12 px-6 overflow-hidden bg-gradient-to-br from-[#1d4ed8] via-[#0ea5e9] to-[#00d2ff]">
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:32px_32px]"></div>
 
         <div className="max-w-4xl mx-auto relative z-10 text-center flex flex-col items-center reveal-on-scroll">
@@ -82,7 +82,7 @@ const Contact = () => {
       </section>
       <section
         id="acceso"
-        className="py-32 px-6 bg-gradient-to-br from-[#0a192f] via-[#071830] to-[#020617] relative overflow-hidden"
+        className="py-8 px-6 bg-gradient-to-br from-[#0a192f] via-[#071830] to-[#020617] relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>

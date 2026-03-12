@@ -32,7 +32,7 @@ const painPointsData = [
 
 const PainPoints = () => {
   return (
-    <section id="pain-points" className="py-32 px-6 bg-[#0a192f] relative overflow-hidden">
+    <section id="pain-points" className="py-8 px-6 bg-[#0a192f] relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-subtle opacity-10"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -46,7 +46,7 @@ const PainPoints = () => {
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {painPointsData.map((problem, index) => (
             <div
               key={index}

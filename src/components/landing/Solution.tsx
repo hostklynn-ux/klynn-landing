@@ -61,7 +61,7 @@ const itemList = [
 
 const Solution = () => {
   return (
-    <section id="solution" className="py-32 px-6 bg-gradient-to-b from-[#0B2447] via-[#06152b] to-[#020617] relative overflow-hidden">
+    <section id="solution" className="py-8 px-6 bg-gradient-to-b from-[#0B2447] via-[#06152b] to-[#020617] relative overflow-hidden">
 
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-20 w-72 h-72 bg-blue-600/10 rounded-full blur-[100px]"></div>
@@ -82,7 +82,7 @@ const Solution = () => {
           </h3>
         </div>
 
-        <div className="flex flex-col lg:flex-row w-full mb-32">
+        <div className="flex flex-col lg:flex-row w-full mb-8">
           {mainSteps.map((step, index) => (
             <div 
               key={index} 

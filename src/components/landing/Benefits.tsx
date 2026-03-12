@@ -23,7 +23,7 @@ const benefitsData = [
 
 const Benefits = () => {
   return (
-    <section id="benefits" className="py-32 px-6 bg-[#fafafa] relative overflow-hidden">
+    <section id="benefits" className="py-8 px-6 bg-[#fafafa] relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
         <div className="text-center mb-20 reveal-on-scroll">
@@ -35,18 +35,15 @@ const Benefits = () => {
           </h3>
         </div>
 
-        {/* === GRID HORIZONTAL (4 Columnas en Desktop) === */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6">
           {benefitsData.map((benefit, index) => (
             <div 
               key={index} 
               className="reveal-on-scroll" 
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              {/* Tarjeta con layout vertical interno y texto centrado */}
               <div className="bg-white rounded-2xl p-6 h-full shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-200 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgb(0,0,0,0.06)] transition-all duration-300 flex flex-col items-center text-center group">
 
-                {/* Ícono centrado arriba */}
                 <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors duration-300 shrink-0">
                   <CheckCircle2 className="w-7 h-7 text-[#3b82f6] transition-transform duration-300 group-hover:scale-110" strokeWidth={2.5} />
                 </div>

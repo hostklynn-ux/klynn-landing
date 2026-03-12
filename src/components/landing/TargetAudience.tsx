@@ -27,7 +27,7 @@ const targetAudiences = [
 
 const TargetAudience = () => {
   return (
-    <section id="target-audience" className="py-32 px-6 bg-[#020617] relative overflow-hidden">
+    <section id="target-audience" className="py-8 px-6 bg-[#020617] relative overflow-hidden">
 
       <div className="absolute top-0 left-1/2 w-[800px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] -translate-x-1/2 pointer-events-none"></div>
 
@@ -47,7 +47,7 @@ const TargetAudience = () => {
           </h3>
         </div>
 
-        <div className="mb-32 reveal-on-scroll">
+        <div className="mb-16 reveal-on-scroll">
           <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
             {targetAudiences.map((item, index) => (
               <div
