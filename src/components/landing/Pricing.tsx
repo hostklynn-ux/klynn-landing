@@ -20,7 +20,7 @@ const Pricing = () => {
   };
 
   return (
-    <section id="precios" className="py-8 px-6 bg-[#fafafa] relative overflow-hidden">
+    <section id="pricing" className="py-8 px-6 bg-[#fafafa] relative overflow-hidden">
       
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-cyan-100/40 rounded-full blur-[100px] pointer-events-none translate-y-1/3 -translate-x-1/3"></div>

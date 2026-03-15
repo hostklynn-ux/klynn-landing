@@ -44,7 +44,7 @@ const Contact = () => {
   };
 
   const scrollToForm = () => {
-    const el = document.getElementById('acceso');
+    const el = document.getElementById('contact');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
@@ -81,7 +81,7 @@ const Contact = () => {
         </div>
       </section>
       <section
-        id="acceso"
+        id="contact"
         className="py-8 px-6 bg-gradient-to-br from-[#0a192f] via-[#071830] to-[#020617] relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
