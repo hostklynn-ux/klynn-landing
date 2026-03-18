@@ -132,7 +132,7 @@ const Header = () => {
         />
 
         <div
-          className={`fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-[#0a192f] border-l border-slate-800 shadow-2xl z-[102] flex flex-col transform transition-transform duration-300 ease-in-out ${mobileOpen ? "translate-x-0" : "translate-x-full"
+          className={`fixed top-0 left-0 bottom-0 w-[85%] max-w-sm bg-[#0a192f] border-l border-slate-800 shadow-2xl z-[102] flex flex-col transform transition-transform duration-300 ease-in-out ${mobileOpen ? "-translate-x-0" : "-translate-x-full"
             }`}
         >
 
