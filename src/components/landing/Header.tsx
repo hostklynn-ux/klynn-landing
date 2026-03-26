@@ -15,10 +15,8 @@ const navLinks = [
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
+  
   useEffect(() => {
-    setMounted(true);
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -50,7 +48,8 @@ const Header = () => {
     setMobileOpen(false);
   };
 
-  const headerBackgroundClass = mounted && isScrolled
+  // ACTUALIZADO: Quitamos la validación de 'mounted &&'
+  const headerBackgroundClass = isScrolled
     ? "bg-[#0a192f]/95 backdrop-blur-md border-b border-slate-800 shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
     : "bg-transparent border-b border-transparent shadow-none";
 
@@ -111,8 +110,7 @@ const Header = () => {
 
           <div className="flex-1 flex justify-end">
             <Button
-              className="group relative flex items-center justify-center text-white font-semibold transition-all duration-300 bg-gradient-to-r from-[#1d4ed8] to-[#00d2ff] hover:from-[#1e40af] hover:to-[#0891b2] shadow-[0_0_15px_rgba(0,210,255,0.2)] hover:shadow-[0_0_25px_rgba(0,210,255,0.4)] border-0 rounded-xl
-                h-[44px] md:h-12 px-4 sm:px-6 text-[13px] sm:text-sm"
+              className="group relative flex items-center justify-center text-white font-semibold transition-all duration-300 bg-gradient-to-r from-[#1d4ed8] to-[#00d2ff] hover:from-[#1e40af] hover:to-[#0891b2] shadow-[0_0_15px_rgba(0,210,255,0.2)] hover:shadow-[0_0_25px_rgba(0,210,255,0.4)] border-0 rounded-xl h-[44px] md:h-12 px-4 sm:px-6 text-[13px] sm:text-sm"
               onClick={scrollToContact}
             >
               <span className="md:hidden">Solicitar</span>
@@ -125,15 +123,13 @@ const Header = () => {
       <div className="md:hidden">
 
         <div
-          className={`fixed inset-0 bg-black/40 z-[101] transition-opacity duration-300 ease-in-out ${mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
-            }`}
+          className={`fixed inset-0 bg-black/40 z-[101] transition-opacity duration-300 ease-in-out ${mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
           onClick={() => setMobileOpen(false)}
           aria-hidden="true"
         />
 
         <div
-          className={`fixed top-0 left-0 bottom-0 w-[85%] max-w-sm bg-[#0a192f] border-l border-slate-800 shadow-2xl z-[102] flex flex-col transform transition-transform duration-300 ease-in-out ${mobileOpen ? "-translate-x-0" : "-translate-x-full"
-            }`}
+          className={`fixed top-0 left-0 bottom-0 w-[85%] max-w-sm bg-[#0a192f] border-l border-slate-800 shadow-2xl z-[102] flex flex-col transform transition-transform duration-300 ease-in-out ${mobileOpen ? "-translate-x-0" : "-translate-x-full"}`}
         >
 
           <div className="h-16 px-4 flex items-center justify-end border-b border-slate-800/50 shrink-0">
