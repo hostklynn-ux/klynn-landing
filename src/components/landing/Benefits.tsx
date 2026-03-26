@@ -23,7 +23,7 @@ const benefitsData = [
 
 const Benefits = () => {
   return (
-    <section id="benefits" className="py-8 px-6 bg-[#fafafa] relative overflow-hidden">
+    <section id="benefits" className="py-24 px-6 bg-[#fafafa] relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
         <div className="text-center mb-20 reveal-on-scroll">
@@ -42,13 +42,13 @@ const Benefits = () => {
               className="reveal-on-scroll" 
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="bg-white rounded-2xl p-6 h-full shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-200 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgb(0,0,0,0.06)] transition-all duration-300 flex flex-col items-center text-center group">
+              <div className="bg-white rounded-2xl p-6 h-full shadow-[0_8px_30px_rgba(59,130,246,0.05)] border-2 border-[#3b82f6] hover:shadow-[0_15px_40px_rgba(59,130,246,0.15)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group cursor-default">
 
-                <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors duration-300 shrink-0">
-                  <CheckCircle2 className="w-7 h-7 text-[#3b82f6] transition-transform duration-300 group-hover:scale-110" strokeWidth={2.5} />
+                <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-[#3b82f6] transition-colors duration-300 shrink-0">
+                  <CheckCircle2 className="w-7 h-7 text-[#3b82f6] group-hover:text-white transition-colors duration-300" strokeWidth={2.5} />
                 </div>
 
-                <h3 className="text-lg font-bold text-[#0B2447] mb-2 tracking-tight leading-tight">
+                <h3 className="text-lg font-bold text-[#0B2447] mb-2 tracking-tight leading-tight group-hover:text-[#3b82f6] transition-colors duration-300">
                   {benefit.title}
                 </h3>
                 <p className="text-slate-600 leading-relaxed font-medium text-sm">
