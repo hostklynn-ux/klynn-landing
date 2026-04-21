@@ -12,11 +12,11 @@ const targetAudiences = [
     icon: Briefcase,
   },
   {
-    title: "Operadores multi-unidad",
+    title: "Operadores multi-propiedad",
     icon: Building2,
   },
   {
-    title: "Hoteles Boutique",
+    title: "Hoteles boutique",
     icon: Star,
   },
   {
@@ -27,27 +27,26 @@ const targetAudiences = [
 
 const TargetAudience = () => {
   return (
-    <section id="target-audience" className="py-8 px-6 bg-[#020617] relative overflow-hidden">
+    <section id="target-audience" className="py-24 px-6 bg-[#020617] relative overflow-hidden">
 
       <div className="absolute top-0 left-1/2 w-[800px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] -translate-x-1/2 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
 
-        <div className="text-center mb-24 reveal-on-scroll">
-
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight leading-[1.1]">
+        <div className="text-center mb-20 reveal-on-scroll">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-[1.1]">
             Diseñado para operadores <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1d4ed8] to-[#00d2ff]">
               de renta corta.
             </span>
           </h2>
 
-          <h3 className="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed font-medium">
-            Es automatización estructurada para operadores de Airbnb y renta corta que quieren escalar con control.
+          <h3 className="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto leading-relaxed font-medium">
+            Si gestionas propiedades, esto es para ti.
           </h3>
         </div>
 
-        <div className="mb-16 reveal-on-scroll">
+        <div className="mb-20 reveal-on-scroll">
           <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
             {targetAudiences.map((item, index) => (
               <div
@@ -59,7 +58,7 @@ const TargetAudience = () => {
                   <item.icon className="w-7 h-7 text-[#00d2ff]" strokeWidth={2} />
                 </div>
 
-                <h4 className="text-lg md:text-xl font-bold text-white tracking-tight leading-tight">
+                <h4 className="text-lg md:text-xl font-bold text-white tracking-tight leading-tight group-hover:text-[#00d2ff] transition-colors duration-300">
                   {item.title}
                 </h4>
               </div>
@@ -69,10 +68,13 @@ const TargetAudience = () => {
 
         <div className="text-center reveal-on-scroll">
           <div className="inline-block relative">
-            <div className="absolute inset-0 bg-[#00d2ff]/20 blur-xl rounded-full"></div>
+            <div className="absolute inset-0 bg-[#00d2ff]/10 blur-2xl rounded-full"></div>
 
-            <h4 className="relative z-10 text-2xl md:text-3xl font-bold text-white border-y border-slate-700/50 py-6 px-4 md:px-12 bg-[#0a192f]/50 backdrop-blur-sm rounded-2xl shadow-xl">
-              Si tu propiedad es un negocio, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#3b82f6]">tu operación también debe serlo.</span>
+            <h4 className="relative z-10 text-2xl md:text-3xl lg:text-4xl font-bold text-white border border-slate-700/50 py-8 px-6 md:px-16 bg-[#0f172a]/80 backdrop-blur-md rounded-3xl shadow-2xl">
+              Si tu propiedad es un negocio, <br className="hidden sm:block mt-2" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#3b82f6]">
+                tu operación también debe serlo.
+              </span>
             </h4>
           </div>
         </div>
