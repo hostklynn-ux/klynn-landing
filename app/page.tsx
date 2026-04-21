@@ -1,6 +1,6 @@
 'use client';
 
-import Contact from "@/src/components/landing/Contact";
+import FinalCTA from "@/src/components/landing/FinalCTA";
 import Hero from "@/src/components/landing/Hero";
 import Benefits from "@/src/components/landing/Benefits";
 import PainPoints from "@/src/components/landing/PainPoints";
@@ -17,7 +17,7 @@ const Landing = () => {
       <Benefits />
       <TargetAudience />
       <Pricing />
-      <Contact />
+      <FinalCTA />
     </>
   );
 };
