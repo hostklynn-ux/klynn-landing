@@ -1,12 +1,12 @@
 'use client';
 
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, ArrowRight, AlertTriangle } from "lucide-react";
 import { Button } from "../ui/button";
 
 const features = [
   "Asignación automática",
   "Cleaners verificados",
-  "Seguimiento operativo",
+  "Seguimiento en tiempo real", // Actualizado
   "Historial de servicios",
   "Soporte prioritario"
 ];
@@ -20,33 +20,33 @@ const Pricing = () => {
   };
 
   return (
-    <section id="pricing" className="py-8 px-6 bg-[#fafafa] relative overflow-hidden">
-      
+    <section id="pricing" className="py-24 px-6 bg-[#fafafa] relative overflow-hidden">
+
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-cyan-100/40 rounded-full blur-[100px] pointer-events-none translate-y-1/3 -translate-x-1/3"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        
+
         <div className="text-center mb-16 reveal-on-scroll">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#0B2447] mb-6 tracking-tight">
-            Escala tu operación <br className="hidden sm:block" />
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0B2447] mb-6 tracking-tight">
+            Accede antes del <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1d4ed8] to-[#00d2ff]">
-              por el costo de una limpieza.
+              lanzamiento.
             </span>
           </h2>
           <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto font-medium">
-            Únete a nuestra fase de lanzamiento y asegura este precio preferencial de por vida.
+            Precio preferencial solo para early adopters.
           </p>
         </div>
 
         <div className="max-w-md mx-auto reveal-on-scroll">
-          <div className="bg-white rounded-2xl p-8 shadow-[0_15px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-slate-200 relative transition-all duration-300 transform hover:-translate-y-1">
-            
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1d4ed8] to-[#00d2ff]"></div>
+          <div className="bg-white rounded-3xl p-8 shadow-[0_15px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-slate-200 relative transition-all duration-300 transform hover:-translate-y-1">
+
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1d4ed8] to-[#00d2ff] rounded-t-3xl"></div>
 
             <div className="flex justify-between items-center mb-6 pt-2">
               <h3 className="text-xl font-bold text-[#0B2447]">Plan Early Host</h3>
-              <div className="flex items-center gap-1 bg-blue-50 text-blue-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 bg-amber-50 text-amber-600 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider border border-amber-100">
                 <Sparkles className="w-3 h-3" />
                 Lanzamiento
               </div>
@@ -56,7 +56,7 @@ const Pricing = () => {
               <span className="text-6xl font-black text-[#0B2447] tracking-tighter">$29</span>
               <span className="text-slate-500 font-medium">/ mes</span>
             </div>
-            
+
             <p className="text-slate-600 font-semibold mb-8 border-b border-slate-100 pb-8">
               Hasta 10 propiedades
             </p>
@@ -73,15 +73,17 @@ const Pricing = () => {
             </ul>
 
             <Button
-              className="group relative flex items-center justify-center gap-2 w-full h-[52px] text-white font-semibold text-base transition-all duration-300 bg-gradient-to-r from-[#1d4ed8] to-[#00d2ff] hover:from-[#1e40af] hover:to-[#0891b2] shadow-[0_8px_20px_rgba(0,210,255,0.25)] hover:shadow-[0_10px_25px_rgba(0,210,255,0.4)] border-0 rounded-xl"
+              className="group relative flex items-center justify-center gap-2 w-full h-[52px] text-white font-bold text-base transition-all duration-300 bg-gradient-to-r from-[#1d4ed8] to-[#00d2ff] hover:from-[#1e40af] hover:to-[#0891b2] shadow-[0_8px_20px_rgba(0,210,255,0.25)] hover:shadow-[0_10px_25px_rgba(0,210,255,0.4)] border-0 rounded-xl"
               onClick={scrollToContact}
             >
               Reservar acceso anticipado
+              <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
-            
-            <p className="text-center text-xs text-slate-400 mt-4 font-medium">
-              Cupos limitados para la fase Beta.
-            </p>
+
+            <div className="mt-5 flex items-center justify-center gap-1.5 text-amber-600 font-bold text-sm bg-amber-50/50 py-2 rounded-lg">
+              <AlertTriangle className="w-4 h-4" strokeWidth={2.5} />
+              <span>Cupos limitados para fase beta</span>
+            </div>
 
           </div>
         </div>
