@@ -29,13 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         
-        <DevGuard>
-          <div className="min-h-screen bg-background">
-            <Header />
-              <main>{children}</main>
-            <Footer />
-          </div>
-        </DevGuard>
+        <DevGuard />
 
         <div className="min-h-screen bg-background">
           <Header />
