@@ -8,7 +8,7 @@ export default function DevGuard() {
       const password = prompt('Ingrese contraseña')
 
       if (password !== 'Klynn_secure_dev_@2026') {
-        document.body.innerHTML = 'Acceso denegado'
+        document.body.innerHTML = 'https://google.com'
       }
     }
   }, [])
