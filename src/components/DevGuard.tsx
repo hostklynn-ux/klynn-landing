@@ -4,14 +4,18 @@ import { useEffect } from 'react'
 
 export default function DevGuard() {
   useEffect(() => {
-    if (window.location.hostname === 'dev.getklynn.com') {
+    const hostname = window.location.hostname
+
+    const isDev =
+      hostname === 'dev.getklynn.com' ||
+      hostname.includes('pages.dev')
+
+    if (isDev) {
       const password = window.prompt('Contraseña')
 
       if (password !== 'klynn-dev-2026') {
-        // 💣 BORRA TODO el documento
+        // 💣 borra TODO el contenido
         document.documentElement.innerHTML = ''
-
-        // 💣 evita que React vuelva a renderizar
         throw new Error('Access blocked')
       }
     }
