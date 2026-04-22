@@ -130,3 +130,58 @@
     opacity: 0;
   }
 }
+
+/* Animaciones de scroll para mobile - simula efecto hover */
+@keyframes cardPulse {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 8px 30px rgba(59, 130, 246, 0.05));
+  }
+  50% {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 15px 40px rgba(59, 130, 246, 0.15));
+  }
+}
+
+@keyframes cardPulseDark {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
+  }
+  50% {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.12));
+  }
+}
+
+@keyframes cardPulseRed {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 8px 16px rgba(255, 77, 77, 0.08));
+  }
+  50% {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 8px 30px rgba(255, 77, 77, 0.1));
+  }
+}
+
+/* Aplicar animaciones en mobile cuando está visible */
+@media (max-width: 768px) {
+  .scroll-card.scroll-animated {
+    animation: cardPulse 0.6s ease-out forwards;
+  }
+
+  .scroll-card.scroll-animated.dark {
+    animation: cardPulseDark 0.6s ease-out forwards;
+  }
+
+  .scroll-card.scroll-animated.red {
+    animation: cardPulseRed 0.6s ease-out forwards;
+  }
+
+  /* Para iconos dentro de cards animadas */
+  .scroll-card.scroll-animated svg,
+  .scroll-card.scroll-animated .group-hover\:bg-blue-900\/30 {
+    transition: all 0.3s ease-out;
+  }
+}

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from "react";
 import { Home, Briefcase, Building2, Star, Sparkles } from "lucide-react";
 
 const targetAudiences = [
@@ -26,6 +27,29 @@ const targetAudiences = [
 ];
 
 const TargetAudience = () => {
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed', 'scroll-animated');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll('.reveal-on-scroll, .scroll-card').forEach((el) => {
+      observerRef.current?.observe(el);
+    });
+
+    return () => {
+      observerRef.current?.disconnect();
+    };
+  }, []);
+
   return (
     <section id="target-audience" className="py-24 px-6 bg-[#020617] relative overflow-hidden">
 
@@ -51,7 +75,7 @@ const TargetAudience = () => {
             {targetAudiences.map((item, index) => (
               <div
                 key={index}
-                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-[#0f172a]/60 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 flex items-center gap-6 hover:border-[#00d2ff]/40 hover:bg-[#0f172a]/90 hover:shadow-[0_10px_30px_rgba(0,210,255,0.1)] transition-all duration-300 group hover:-translate-y-1 cursor-default"
+                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] scroll-card bg-[#0f172a]/60 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 flex items-center gap-6 hover:border-[#00d2ff]/40 hover:bg-[#0f172a]/90 hover:shadow-[0_10px_30px_rgba(0,210,255,0.1)] transition-all duration-300 group hover:-translate-y-1 cursor-default"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="w-14 h-14 shrink-0 rounded-xl bg-blue-900/30 border border-blue-500/20 flex items-center justify-center group-hover:bg-[#00d2ff]/20 group-hover:border-[#00d2ff]/50 transition-colors duration-300">

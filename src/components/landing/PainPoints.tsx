@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from "react";
 import {
   MessageSquare,
   ClipboardList,
@@ -31,6 +32,28 @@ const painPointsData = [
 ];
 
 const PainPoints = () => {
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed', 'scroll-animated');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll('.reveal-on-scroll, .scroll-card').forEach((el) => {
+      observerRef.current?.observe(el);
+    });
+
+    return () => {
+      observerRef.current?.disconnect();
+    };
+  }, []);
   return (
     <section id="pain-points" className="py-24 px-6 bg-[#0B2447] relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-subtle opacity-10"></div>
@@ -53,7 +76,7 @@ const PainPoints = () => {
           {painPointsData.map((problem, index) => (
             <div
               key={index}
-              className="bg-[#0f172a]/80 backdrop-blur-md rounded-2xl p-6 border border-slate-800 reveal-on-scroll shadow-lg hover:border-red-500/30 hover:shadow-[0_8px_30px_rgba(255,77,77,0.1)] hover:-translate-y-2 transition-all duration-300 group flex flex-col items-center text-center cursor-default"
+              className="bg-[#0f172a]/80 backdrop-blur-md rounded-2xl p-6 border border-slate-800 reveal-on-scroll scroll-card shadow-lg hover:border-red-500/30 hover:shadow-[0_8px_30px_rgba(255,77,77,0.1)] hover:-translate-y-2 transition-all duration-300 group flex flex-col items-center text-center cursor-default red"
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <div className="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-6 group-hover:bg-red-500/20 transition-colors duration-300">

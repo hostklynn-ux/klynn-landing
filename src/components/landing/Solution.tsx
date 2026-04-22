@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from "react";
 import {
   CalendarCheck,
   Cpu,
@@ -39,6 +40,29 @@ const mainSteps = [
 ];
 
 const Solution = () => {
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed', 'scroll-animated');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll('.reveal-on-scroll, .scroll-card').forEach((el) => {
+      observerRef.current?.observe(el);
+    });
+
+    return () => {
+      observerRef.current?.disconnect();
+    };
+  }, []);
+
   return (
     <section id="solution" className="py-24 px-6 bg-gradient-to-b from-[#0B2447] via-[#06152b] to-[#020617] relative overflow-hidden">
 
@@ -65,7 +89,7 @@ const Solution = () => {
           {mainSteps.map((step, index) => (
             <div
               key={index}
-              className="flex flex-col lg:flex-row flex-1 reveal-on-scroll"
+              className="flex flex-col lg:flex-row flex-1 reveal-on-scroll scroll-card"
               style={{ animationDelay: `${index * 150}ms` }}
             >
 

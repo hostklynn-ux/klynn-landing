@@ -30,14 +30,14 @@ const Benefits = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
+            entry.target.classList.add('revealed', 'scroll-animated');
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
 
-    document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+    document.querySelectorAll('.reveal-on-scroll, .scroll-card').forEach((el) => {
       observerRef.current?.observe(el);
     });
 
@@ -69,7 +69,7 @@ const Benefits = () => {
           {benefitsData.map((benefit, index) => (
             <div
               key={index}
-              className="reveal-on-scroll relative"
+              className="reveal-on-scroll scroll-card relative"
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <div className="bg-white rounded-2xl p-6 h-full shadow-[0_8px_30px_rgba(59,130,246,0.05)] border-2 border-[#3b82f6] hover:shadow-[0_15px_40px_rgba(59,130,246,0.15)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group cursor-default relative z-10">
