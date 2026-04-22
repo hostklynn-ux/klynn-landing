@@ -27,6 +27,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (
+                location.hostname === 'dev.getklynn.com' ||
+                location.hostname.includes('pages.dev')
+              ) {
+                document.documentElement.style.display = 'none';
+              }
+            `,
+          }}
+        />
+    </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         
         <DevGuard />

@@ -13,10 +13,12 @@ export default function DevGuard() {
     if (isDev) {
       const password = window.prompt('Contraseña')
 
-      if (password !== 'klynn-dev-2026') {
-        // 💣 borra TODO el contenido
+      if (password === 'klynn-dev-2026') {
+        // ✅ mostrar contenido
+        document.documentElement.style.display = 'block'
+      } else {
+        // ❌ romper completamente
         document.documentElement.innerHTML = ''
-        throw new Error('Access blocked')
       }
     }
   }, [])
