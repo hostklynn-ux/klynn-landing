@@ -35,12 +35,12 @@ export default function RootLayout({
                 location.hostname === 'dev.getklynn.com' ||
                 location.hostname.includes('pages.dev')
               ) {
-                document.documentElement.style.display = 'none';
+                document.body.style.display = 'none';
               }
             `,
           }}
         />
-    </head>
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         
         <DevGuard />

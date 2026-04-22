@@ -14,12 +14,12 @@ export default function DevGuard() {
       const password = window.prompt('Contraseña')
 
       if (password === 'klynn-dev-2026') {
-        // ✅ mostrar contenido
-        document.documentElement.style.display = 'block'
+        document.body.style.display = 'block'
       } else {
-        // ❌ romper completamente
         document.documentElement.innerHTML = ''
       }
+    } else {
+      document.body.style.display = 'block'
     }
   }, [])
 
