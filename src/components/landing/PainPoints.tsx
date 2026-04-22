@@ -39,7 +39,9 @@ const PainPoints = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('revealed', 'scroll-animated');
+            entry.target.classList.add('revealed', 'in-view');
+          } else {
+            entry.target.classList.remove('in-view');
           }
         });
       },
@@ -76,7 +78,7 @@ const PainPoints = () => {
           {painPointsData.map((problem, index) => (
             <div
               key={index}
-              className="bg-[#0f172a]/80 backdrop-blur-md rounded-2xl p-6 border border-slate-800 reveal-on-scroll scroll-card shadow-lg hover:border-red-500/30 hover:shadow-[0_8px_30px_rgba(255,77,77,0.1)] hover:-translate-y-2 transition-all duration-300 group flex flex-col items-center text-center cursor-default red"
+              className="bg-[#0f172a]/80 backdrop-blur-md rounded-2xl p-6 border border-slate-800 reveal-on-scroll scroll-card red shadow-lg hover:border-red-500/30 hover:shadow-[0_8px_30px_rgba(255,77,77,0.1)] hover:-translate-y-2 transition-all duration-300 group flex flex-col items-center text-center cursor-default"
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <div className="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-6 group-hover:bg-red-500/20 transition-colors duration-300">

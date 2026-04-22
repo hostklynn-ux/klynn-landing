@@ -20,7 +20,9 @@ const Pricing = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('revealed', 'scroll-animated');
+            entry.target.classList.add('revealed', 'in-view');
+          } else {
+            entry.target.classList.remove('in-view');
           }
         });
       },
@@ -63,8 +65,8 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="max-w-md mx-auto reveal-on-scroll scroll-card">
-          <div className="bg-white rounded-3xl p-8 shadow-[0_15px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-slate-200 relative transition-all duration-300 transform hover:-translate-y-1 dark">
+        <div className="max-w-md mx-auto reveal-on-scroll scroll-card pricing">
+          <div className="bg-white rounded-3xl p-8 shadow-[0_15px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-slate-200 relative transition-all duration-300 transform hover:-translate-y-1">
 
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1d4ed8] to-[#00d2ff] rounded-t-3xl"></div>
 

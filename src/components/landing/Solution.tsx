@@ -47,7 +47,9 @@ const Solution = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('revealed', 'scroll-animated');
+            entry.target.classList.add('revealed', 'in-view');
+          } else {
+            entry.target.classList.remove('in-view');
           }
         });
       },
@@ -89,7 +91,7 @@ const Solution = () => {
           {mainSteps.map((step, index) => (
             <div
               key={index}
-              className="flex flex-col lg:flex-row flex-1 reveal-on-scroll scroll-card"
+              className="flex flex-col lg:flex-row flex-1 reveal-on-scroll scroll-card dark"
               style={{ animationDelay: `${index * 150}ms` }}
             >
 

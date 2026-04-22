@@ -30,7 +30,9 @@ const Benefits = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('revealed', 'scroll-animated');
+            entry.target.classList.add('revealed', 'in-view');
+          } else {
+            entry.target.classList.remove('in-view');
           }
         });
       },
